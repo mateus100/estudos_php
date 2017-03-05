@@ -4,7 +4,7 @@
 		$last = filectime($cache);
 		$c = time() - $last;
 
-		if ($c > 10) {
+		if ($c > 8616409) {
 			return false;
 		} else {
 			return true;

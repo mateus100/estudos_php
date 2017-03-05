@@ -1,0 +1,15 @@
+/*public function delete($table, $where, $where_cond = "AND") {
+		if(!empty($table) && ( is_array($where) && count($where) > 0 )) {
+			$sql = "DELETE FROM ".$table;
+
+			if(count($where) > 0) {
+				$dados = array();
+				foreach($where as $chave => $valor) {
+					$dados[] = $chave." = '".addslashes($valor)."'";
+				}
+				$sql = $sql." WHERE ".implode(" ".$where_cond." ", $dados);
+			}
+
+			 $this->pdo->query($sql);
+		  }
+		}*/
