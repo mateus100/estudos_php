@@ -1,14 +1,12 @@
 <?php 
  class core {
-    
-    private $controller;
-
-    private $action;
-
 
     public function run() {
        
-        $url = substr($_SERVER["PHP_SELF"], 10);
+       $url = explode("index.php", $_SERVER["PHP_SELF"]);
+
+       $url = end($url);
+
        if (!empty($url)) {
            
            $url = explode("/", $url);
@@ -16,24 +14,37 @@
            array_shift($url);
 
            $controller= $url[0]."Controller";
+           
+           array_shift($url);
 
-           if (isset($url[1])) {
-           	$action = $url[1];
+           if (isset($url[0])) {
+           	
+            $action = $url[0];
+
+            array_shift($url);
+
            } else {
-           	$action = "index";
+           	
+            $action = "index";
+           
            }
-            
+          
+           if(count($url) > 0) {
+           $param = $url;
+          }
+
          }  else {
 
          	$controller = "homeController";
          	$action = "index";
+
+          $param = array();
          }    
-          
-          require_once 'core/controller.php';
+         require_once 'core/controller.php';
           
           $c = new $controller();
 
-          $c->$action();
+          call_user_func_array(array($c, $action), $param);
     }
 
  }
